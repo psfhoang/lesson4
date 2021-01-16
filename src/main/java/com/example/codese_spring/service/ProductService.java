@@ -50,7 +50,7 @@ public class ProductService {
     }
 
     public List<ProductCRUD> getProductByPriceWithOrder(Integer sortType) {
-        try {
+
             switch (sortType) {
                 case 0:
                     return productRepository.getAllPriceOutAsc(sortType);
@@ -59,14 +59,11 @@ public class ProductService {
                 default:
                     return null;
             }
-        } catch (Exception e) {
-            System.out.println("Loi roi");
-            return null;
-        }
+
     }
 
     public List<ProductCRUD> getProductByDisplayWithOrder(Integer sortType) {
-        try {
+
             switch (sortType) {
                 case 0:
                     return productRepository.getAllDisplayAsc();
@@ -75,10 +72,6 @@ public class ProductService {
                 default:
                     return null;
             }
-        } catch (Exception e) {
-            System.out.println("Loiiii");
-            return null;
-        }
     }
 
     public List<ProductCRUD> getProductByDisplay(String display) {
@@ -91,7 +84,7 @@ public class ProductService {
     }
 
     public Boolean updateProduct(ProductCRUD productCRUD) {
-        try {
+
             if (productRepository.checkProductExistedById(productCRUD.getProductID())) {
                 if(productRepository.updateProduct(productCRUD) != 0) {
                     return true;
@@ -101,9 +94,5 @@ public class ProductService {
             } else {
                 throw  new ResourceNotFoundException(productCRUD.getDisplay());
             }
-        } catch (Exception e) {
-            System.out.println(e);
-            return false;
-        }
     }
 }
