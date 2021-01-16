@@ -37,8 +37,7 @@ public class ProductService {
 
     public Boolean addProduct(ProductCRUD productCRUD) {
 
-        if (!productRepository.checkProductExistedById(productCRUD.getProductID())
-                && !productRepository.checkProductExistedByName(productCRUD.getDisplay())) {
+        if (!productRepository.checkProductExistedByName(productCRUD.getDisplay())) {
             if (productRepository.addProduct(productCRUD) != 0) {
                 return true;
             } else {

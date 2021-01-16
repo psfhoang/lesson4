@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class ProductRepository {
@@ -48,7 +49,8 @@ public class ProductRepository {
     public Integer addProduct(ProductCRUD productCRUD) {
         String sql = "insert into Product (productID, display, priceIn, priceOut, priceSale" +
                 ", amount, shipday, description, images) values (?,?,?,?,?,?,?,?,?);";
-        Object[] params = {productCRUD.getProductID(), productCRUD.getDisplay(), productCRUD.getPriceIn()
+        String uuid = UUID.randomUUID().toString();
+        Object[] params = { uuid,productCRUD.getDisplay(), productCRUD.getPriceIn()
                 , productCRUD.getPriceIn(), productCRUD.getPriceOut(), productCRUD.getAmount()
                 , productCRUD.getShipday(), productCRUD.getDescription(), productCRUD.getImages()};
         return jdbcTemplate.update(sql, params);
