@@ -113,7 +113,7 @@ public class ProductService {
                 if(productCRUD.getPriceSale()!=null){
                     productCRUD1.setPriceSale(productCRUD.getPriceSale());
                 }
-                if(productRepository.updateProduct(productCRUD) != 0) {
+                if(productRepository.updateProduct(productCRUD1) != 0) {
                     return true;
                 } else {
                     return false;

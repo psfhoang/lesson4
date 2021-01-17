@@ -16,10 +16,24 @@ public class ProductRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+
+    public Integer addReceiptDetails(){
+        return null;
+    }
+
+
+
+
+
     //get all
     public List<ProductGetAll> getAllProducts() {
-        String sql = "select * from Product;";
+        String sql = "select * from Product";
         List<ProductGetAll> product = jdbcTemplate.query(sql, new ProductMapper());
+        return product;
+    }
+    public List<ProductCRUD> getAllProducts1() {
+        String sql = "select * from Product";
+        List<ProductCRUD> product = jdbcTemplate.query(sql, new ProductCRUDMapper());
         return product;
     }
 
@@ -94,4 +108,9 @@ public class ProductRepository {
         return jdbcTemplate.update(sql, productCRUD.getDisplay(), productCRUD.getPriceIn(), productCRUD.getPriceOut(),
                 productCRUD.getPriceSale(), productCRUD.getAmount(), productCRUD.getShipday(), productCRUD.getDescription(), productCRUD.getImages(), productCRUD.getProductID());
     }
+
+
+    //update product set display=....,price=...., where id = abc
+    //sql = update product set id =id '
+    //conditionSql = 'where id = abc'
 }
