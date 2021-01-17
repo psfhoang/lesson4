@@ -8,6 +8,8 @@ import com.example.codese_spring.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 
 @Service
@@ -74,17 +76,43 @@ public class ProductService {
     }
 
     public List<ProductCRUD> getProductByDisplay(String display) {
-        try {
-            return productRepository.getProductByDisplay(display);
-        } catch (Exception e) {
-            System.out.println(e);
-            return null;
-        }
+            if(!display.equals("")) {
+                return productRepository.getProductByDisplay(display);
+            }else {
+                return productRepository.getAllDisplayAsc();
+            }
+
+
     }
 
     public Boolean updateProduct(ProductCRUD productCRUD) {
 
             if (productRepository.checkProductExistedById(productCRUD.getProductID())) {
+                ProductCRUD productCRUD1 = productRepository.getProductById(productCRUD.getProductID());
+                if(productCRUD.getDisplay()!=null){
+                    productCRUD1.setDisplay(productCRUD.getDisplay());
+                }
+                if(productCRUD.getPriceIn()!=null){
+                    productCRUD1.setPriceIn(productCRUD.getPriceIn());
+                }
+                if(productCRUD.getPriceOut()!=null){
+                    productCRUD1.setPriceIn(productCRUD.getPriceIn());
+                }
+                if(productCRUD.getImages()!=null){
+                    productCRUD1.setImages(productCRUD.getImages());
+                }
+                if(productCRUD.getShipday()!=null){
+                    productCRUD1.setShipday(productCRUD.getShipday());
+                }
+                if(productCRUD.getDescription()!=null){
+                    productCRUD1.setDescription(productCRUD.getDescription());
+                }
+                if(productCRUD.getAmount()!=null){
+                    productCRUD1.setAmount(productCRUD.getAmount());
+                }
+                if(productCRUD.getPriceSale()!=null){
+                    productCRUD1.setPriceSale(productCRUD.getPriceSale());
+                }
                 if(productRepository.updateProduct(productCRUD) != 0) {
                     return true;
                 } else {

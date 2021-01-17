@@ -52,7 +52,7 @@ public class ProductController {
         return ResponseEntity.ok(ResponseForm.buildCustomResponse(productService.addProduct(productCRUD), 1, "ok"));
     }
 
-
+    @PutMapping("/update")
     public ResponseEntity<ResponseForm<Boolean>> updateProduct(@RequestBody ProductCRUD productCRUD) {
         return ResponseEntity.ok(ResponseForm.buildCustomResponse(productService.updateProduct(productCRUD), 1, "ok"));
     }

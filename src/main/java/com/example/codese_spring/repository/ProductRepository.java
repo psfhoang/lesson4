@@ -77,17 +77,14 @@ public class ProductRepository {
         return product;
     }
 
-    // get by display desc
     public List<ProductCRUD> getAllDisplayDesc() {
         String sql = "select * from Product order by display DESC and deleted = 0";
         List<ProductCRUD> product = jdbcTemplate.query(sql, new ProductCRUDMapper());
         return product;
     }
 
-    // get by display ignore lower/upper
     public List<ProductCRUD> getProductByDisplay(String display) {
         String sql = "select * from Product where lower(display) = lower(?) and deleted = 0";
-        // String sql = "select * from Product where display ilike ?;";
         Object[] params = {display};
         return jdbcTemplate.query(sql, new ProductCRUDMapper(), params);
     }

@@ -3,11 +3,11 @@ package com.example.codese_spring.dto;
 public class ProductCRUD {
     private String productID;
     private String display;
-    private int priceIn;
-    private int priceOut;
-    private int priceSale;
-    private int amount;
-    private int shipday;
+    private Integer priceIn;
+    private Integer priceOut;
+    private Integer priceSale;
+    private Integer amount;
+    private Integer shipday;
     private String description;
     private String images;
 
@@ -15,7 +15,7 @@ public class ProductCRUD {
 
     }
 
-    public ProductCRUD(String productID, String display, int priceIn, int priceOut, int priceSale, int amount, int shipday, String description, String images) {
+    public ProductCRUD(String productID, String display, Integer priceIn, Integer priceOut, Integer priceSale, Integer amount, Integer shipday, String description, String images) {
         this.productID = productID;
         this.display = display;
         this.priceIn = priceIn;
@@ -43,43 +43,43 @@ public class ProductCRUD {
         this.display = display;
     }
 
-    public int getPriceIn() {
+    public Integer getPriceIn() {
         return priceIn;
     }
 
-    public void setPriceIn(int priceIn) {
+    public void setPriceIn(Integer priceIn) {
         this.priceIn = priceIn;
     }
 
-    public int getPriceOut() {
+    public Integer getPriceOut() {
         return priceOut;
     }
 
-    public void setPriceOut(int priceOut) {
+    public void setPriceOut(Integer priceOut) {
         this.priceOut = priceOut;
     }
 
-    public int getPriceSale() {
+    public Integer getPriceSale() {
         return priceSale;
     }
 
-    public void setPriceSale(int priceSale) {
+    public void setPriceSale(Integer priceSale) {
         this.priceSale = priceSale;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
-    public int getShipday() {
+    public Integer getShipday() {
         return shipday;
     }
 
-    public void setShipday(int shipday) {
+    public void setShipday(Integer shipday) {
         this.shipday = shipday;
     }
 
