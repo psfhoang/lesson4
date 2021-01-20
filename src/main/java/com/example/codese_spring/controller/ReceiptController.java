@@ -18,8 +18,7 @@ public class ReceiptController {
     ReceiptService receiptService;
     @PostMapping("/create")
     public ResponseEntity<ResponseForm<Boolean>> createReceiptDetails(@RequestBody OrderReqDto orderReqDto, HttpServletRequest request){
-        String username = request.getHeader("userID");
-        return ResponseEntity.ok(ResponseForm.buildCustomResponse(receiptService.createReceipt(orderReqDto,username),1,"oke"));
+        return ResponseEntity.ok(ResponseForm.buildCustomResponse(receiptService.createReceipt(orderReqDto),1,"oke"));
 
     }
 

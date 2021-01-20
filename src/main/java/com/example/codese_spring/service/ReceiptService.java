@@ -7,6 +7,8 @@ import com.example.codese_spring.entity.Product;
 import com.example.codese_spring.exception.ProductTransactionException;
 import com.example.codese_spring.repository.ProductRepository;
 import com.example.codese_spring.repository.ReceiptRepository;
+import com.example.codese_spring.repository.UserRepository;
+import com.example.codese_spring.security.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
@@ -22,14 +24,17 @@ public class ReceiptService {
     ReceiptRepository receiptRepository;
     @Autowired
     ProductService productService;
-
+    @Autowired
+    UserRepository userRepository;
     public ReceiptInfor showAll(){
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return receiptRepository.showInforAll();
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = ProductTransactionException.class)
-    public Boolean createReceipt(OrderReqDto orderReqDto, String userId) {
+    public Boolean createReceipt(OrderReqDto orderReqDto) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        UserDTO userDTO = userRepository.getUserByName(username);
         List<ProductReqDto> productReqDtos = orderReqDto.getProductReqDtos();
         Integer money = 0;
         for(ProductReqDto productReqDto : productReqDtos){
@@ -38,7 +43,7 @@ public class ReceiptService {
         }
         String status = "chua thanh toan";
         String UUID = java.util.UUID.randomUUID().toString();
-        if(receiptRepository.addReceipt(UUID, money, status, userId)==0){
+        if(receiptRepository.addReceipt(UUID, money, status, userDTO.getID())==0){
             return false;
         };
 

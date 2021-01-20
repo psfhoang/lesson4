@@ -67,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers("/user/register").permitAll()
         .antMatchers("/receipt/all").hasAnyAuthority("STAFF","ADMIN")
+        .antMatchers("/receipt/create").hasAnyAuthority("STAFF","ADMIN","USER")
         .anyRequest()
         .authenticated()
     ;
