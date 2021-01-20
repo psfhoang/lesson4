@@ -1,21 +1,31 @@
 package com.example.codese_spring.service;
 
-import com.example.codese_spring.dto.ProductCRUD;
+import com.example.codese_spring.dto.ProductDTO;
 import com.example.codese_spring.dto.ProductGetAll;
+import com.example.codese_spring.exception.ProductTransactionException;
 import com.example.codese_spring.exception.ResourceAlreadyExistException;
 import com.example.codese_spring.exception.ResourceNotFoundException;
 import com.example.codese_spring.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.List;
 
 @Service
 public class ProductService {
     @Autowired
     ProductRepository productRepository;
+
+    public void subAmountProduct(String id, int amount){
+        ProductDTO productDTO = this.getProductById(id);
+        int amountProduct = productDTO.getAmount()-amount;
+        if(amountProduct<0){
+            throw new ProductTransactionException("this product have id = "+ productDTO.getProductID()+
+                    " not enough");
+        }
+        productDTO.setAmount(amountProduct);
+        this.updateProduct(productDTO);
+    }
 
     public List<ProductGetAll> getAllProducts() {
         try {
@@ -27,7 +37,7 @@ public class ProductService {
         }
     }
 
-    public ProductCRUD getProductById(String idInput) {
+    public ProductDTO getProductById(String idInput) {
 
             if (productRepository.checkProductExistedById(idInput)) {
                 return productRepository.getProductById(idInput);
@@ -37,20 +47,20 @@ public class ProductService {
 
     }
 
-    public Boolean addProduct(ProductCRUD productCRUD) {
+    public Boolean addProduct(ProductDTO productDTO) {
 
-        if (!productRepository.checkProductExistedByName(productCRUD.getDisplay())) {
-            if (productRepository.addProduct(productCRUD) != 0) {
+        if (!productRepository.checkProductExistedByName(productDTO.getDisplay())) {
+            if (productRepository.addProduct(productDTO) != 0) {
                 return true;
             } else {
                 return false;
             }
         } else {
-            throw new ResourceAlreadyExistException(productCRUD.getProductID());
+            throw new ResourceAlreadyExistException(productDTO.getProductID());
         }
     }
 
-    public List<ProductCRUD> getProductByPriceWithOrder(Integer sortType) {
+    public List<ProductDTO> getProductByPriceWithOrder(Integer sortType) {
 
             switch (sortType) {
                 case 0:
@@ -63,7 +73,7 @@ public class ProductService {
 
     }
 
-    public List<ProductCRUD> getProductByDisplayWithOrder(Integer sortType) {
+    public List<ProductDTO> getProductByDisplayWithOrder(Integer sortType) {
 
             switch (sortType) {
                 case 0:
@@ -75,7 +85,7 @@ public class ProductService {
             }
     }
 
-    public List<ProductCRUD> getProductByDisplay(String display) {
+    public List<ProductDTO> getProductByDisplay(String display) {
             if(!display.equals("")) {
                 return productRepository.getProductByDisplay(display);
             }else {
@@ -85,41 +95,41 @@ public class ProductService {
 
     }
 
-    public Boolean updateProduct(ProductCRUD productCRUD) {
+    public Boolean updateProduct(ProductDTO productDTO) {
 
-            if (productRepository.checkProductExistedById(productCRUD.getProductID())) {
-                ProductCRUD productCRUD1 = productRepository.getProductById(productCRUD.getProductID());
-                if(productCRUD.getDisplay()!=null){
-                    productCRUD1.setDisplay(productCRUD.getDisplay());
+            if (productRepository.checkProductExistedById(productDTO.getProductID())) {
+                ProductDTO productDTO1 = productRepository.getProductById(productDTO.getProductID());
+                if(productDTO.getDisplay()!=null){
+                    productDTO1.setDisplay(productDTO.getDisplay());
                 }
-                if(productCRUD.getPriceIn()!=null){
-                    productCRUD1.setPriceIn(productCRUD.getPriceIn());
+                if(productDTO.getPriceIn()!=null){
+                    productDTO1.setPriceIn(productDTO.getPriceIn());
                 }
-                if(productCRUD.getPriceOut()!=null){
-                    productCRUD1.setPriceIn(productCRUD.getPriceIn());
+                if(productDTO.getPriceOut()!=null){
+                    productDTO1.setPriceIn(productDTO.getPriceIn());
                 }
-                if(productCRUD.getImages()!=null){
-                    productCRUD1.setImages(productCRUD.getImages());
+                if(productDTO.getImages()!=null){
+                    productDTO1.setImages(productDTO.getImages());
                 }
-                if(productCRUD.getShipday()!=null){
-                    productCRUD1.setShipday(productCRUD.getShipday());
+                if(productDTO.getShipday()!=null){
+                    productDTO1.setShipday(productDTO.getShipday());
                 }
-                if(productCRUD.getDescription()!=null){
-                    productCRUD1.setDescription(productCRUD.getDescription());
+                if(productDTO.getDescription()!=null){
+                    productDTO1.setDescription(productDTO.getDescription());
                 }
-                if(productCRUD.getAmount()!=null){
-                    productCRUD1.setAmount(productCRUD.getAmount());
+                if(productDTO.getAmount()!=null){
+                    productDTO1.setAmount(productDTO.getAmount());
                 }
-                if(productCRUD.getPriceSale()!=null){
-                    productCRUD1.setPriceSale(productCRUD.getPriceSale());
+                if(productDTO.getPriceSale()!=null){
+                    productDTO1.setPriceSale(productDTO.getPriceSale());
                 }
-                if(productRepository.updateProduct(productCRUD1) != 0) {
+                if(productRepository.updateProduct(productDTO1) != 0) {
                     return true;
                 } else {
                     return false;
                 }
             } else {
-                throw  new ResourceNotFoundException(productCRUD.getDisplay());
+                throw  new ResourceNotFoundException(productDTO.getDisplay());
             }
     }
 }

@@ -1,6 +1,8 @@
 package com.example.codese_spring.exception;
 
+import com.example.codese_spring.helper.ResponseBuilder.ResponseForm;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -14,6 +16,11 @@ public class ApiExceptionHandler {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public String invalidInputException(Exception e, WebRequest request) {
         return "Thiếu input đầu vào";
+    }
+    @ExceptionHandler(ProductTransactionException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ResponseForm<String>> productNotEnough(Exception e, WebRequest request){
+        return ResponseEntity.ok(ResponseForm.buildCustomResponse(e.getMessage(),HttpStatus.BAD_REQUEST.value(),"fail"));
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)

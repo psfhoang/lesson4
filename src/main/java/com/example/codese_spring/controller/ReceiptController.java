@@ -1,14 +1,12 @@
 package com.example.codese_spring.controller;
 
 import com.example.codese_spring.dto.OrderReqDto;
+import com.example.codese_spring.dto.ReceiptInfor;
 import com.example.codese_spring.helper.ResponseBuilder.ResponseForm;
 import com.example.codese_spring.service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,5 +21,11 @@ public class ReceiptController {
         String username = request.getHeader("userID");
         return ResponseEntity.ok(ResponseForm.buildCustomResponse(receiptService.createReceipt(orderReqDto,username),1,"oke"));
 
+    }
+
+
+    @GetMapping("/all")
+    public ResponseEntity<ResponseForm<ReceiptInfor>> showAllReceipt(){
+        return ResponseEntity.ok(ResponseForm.buildCustomResponse(receiptService.showAll(),1,"ok"));
     }
 }
