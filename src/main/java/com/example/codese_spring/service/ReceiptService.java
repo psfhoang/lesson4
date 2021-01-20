@@ -8,7 +8,7 @@ import com.example.codese_spring.exception.ProductTransactionException;
 import com.example.codese_spring.repository.ProductRepository;
 import com.example.codese_spring.repository.ReceiptRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -24,7 +24,8 @@ public class ReceiptService {
     ProductService productService;
 
     public ReceiptInfor showAll(){
-       return receiptRepository.showInforAll();
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return receiptRepository.showInforAll();
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = ProductTransactionException.class)
