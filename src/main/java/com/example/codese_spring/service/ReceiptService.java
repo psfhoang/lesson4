@@ -19,15 +19,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 @Service
-public class ReceiptService {
+public class    ReceiptService {
     @Autowired
     ReceiptRepository receiptRepository;
     @Autowired
     ProductService productService;
     @Autowired
     UserRepository userRepository;
-    public ReceiptInfor showAll(){
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    public List<ReceiptInfor> showAll(){
         return receiptRepository.showInforAll();
     }
 

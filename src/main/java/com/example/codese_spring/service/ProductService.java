@@ -28,13 +28,7 @@ public class ProductService {
     }
 
     public List<ProductGetAll> getAllProducts() {
-        try {
             return productRepository.getAllProducts();
-        } catch (Exception e) {
-            System.out.println("Fail at repo");
-        } finally {
-            return productRepository.getAllProducts();
-        }
     }
 
     public ProductDTO getProductById(String idInput) {
