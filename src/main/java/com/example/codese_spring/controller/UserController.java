@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
+
   @Autowired
   UserService userService;
+
   @PostMapping(value = "/register")
-  public ResponseEntity<ResponseForm<Boolean>> addUser(@RequestBody UserRegister userRegister){
-    return ResponseEntity.ok(ResponseForm.buildCustomResponse(userService.addUser(userRegister),1,"ok"));
+  public ResponseEntity<ResponseForm<Boolean>> addUser(@RequestBody UserRegister userRegister) {
+    return ResponseEntity
+        .ok(ResponseForm.buildCustomResponse(userService.addUser(userRegister), 1, "ok"));
   }
 
 }

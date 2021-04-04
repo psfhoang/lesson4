@@ -31,6 +31,6 @@ public class UserService {
   }
 
   public boolean isExist(String username, String password) {
-    return userRepository.isExist(username,password);
+    return userRepository.isExist(username, password);
   }
 }

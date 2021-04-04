@@ -1,40 +1,41 @@
 package com.example.codese_spring.entity;
 
 public class ReceiptDetail {
-    private String receiptID;
-    private String productID;
-    private int amount;
 
-    public ReceiptDetail() {
-    }
+  private String receiptID;
+  private String productID;
+  private int amount;
 
-    public ReceiptDetail(String receiptID, String productID, int amount) {
-        this.receiptID = receiptID;
-        this.productID = productID;
-        this.amount = amount;
-    }
+  public ReceiptDetail() {
+  }
 
-    public String getReceiptID() {
-        return receiptID;
-    }
+  public ReceiptDetail(String receiptID, String productID, int amount) {
+    this.receiptID = receiptID;
+    this.productID = productID;
+    this.amount = amount;
+  }
 
-    public void setReceiptID(String receiptID) {
-        this.receiptID = receiptID;
-    }
+  public String getReceiptID() {
+    return receiptID;
+  }
 
-    public String getProductID() {
-        return productID;
-    }
+  public void setReceiptID(String receiptID) {
+    this.receiptID = receiptID;
+  }
 
-    public void setProductID(String productID) {
-        this.productID = productID;
-    }
+  public String getProductID() {
+    return productID;
+  }
 
-    public int getAmount() {
-        return amount;
-    }
+  public void setProductID(String productID) {
+    this.productID = productID;
+  }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
+  public int getAmount() {
+    return amount;
+  }
+
+  public void setAmount(int amount) {
+    this.amount = amount;
+  }
 }

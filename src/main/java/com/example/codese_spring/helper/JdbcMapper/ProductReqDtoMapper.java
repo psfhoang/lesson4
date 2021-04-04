@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public class ProductReqDtoMapper implements RowMapper {
 
-    @Override
-    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return null;
-    }
+  @Override
+  public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+    return null;
+  }
 }

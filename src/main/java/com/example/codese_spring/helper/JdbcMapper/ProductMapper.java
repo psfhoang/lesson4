@@ -7,13 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProductMapper implements RowMapper {
-    @Override
-    public Product mapRow(ResultSet resultSet, int i) throws SQLException {
-        Product product = new Product();
-        product.setProductID(resultSet.getString("productID"));
-        product.setDisplay(resultSet.getString("display"));
-        product.setPriceSale(resultSet.getInt("priceSale"));
-        product.setImages(resultSet.getString("images"));
-        return product;
-    }
+
+  @Override
+  public Product mapRow(ResultSet resultSet, int i) throws SQLException {
+    Product product = new Product();
+    product.setProductID(resultSet.getString("productID"));
+    product.setDisplay(resultSet.getString("display"));
+    product.setPriceSale(resultSet.getInt("priceSale"));
+    product.setImages(resultSet.getString("images"));
+    return product;
+  }
 }

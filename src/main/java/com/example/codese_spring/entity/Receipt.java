@@ -3,80 +3,82 @@ package com.example.codese_spring.entity;
 import java.sql.Timestamp;
 
 public class Receipt {
-    private String receiptID;
-    private String accountID;
-    private Integer totalMoney;
-    private String status;
-    private byte deleted;
-    private String createAt;
-    private String updateAt;
 
-    public Receipt() {
-    }
+  private String receiptID;
+  private String accountID;
+  private Integer totalMoney;
+  private String status;
+  private byte deleted;
+  private String createAt;
+  private String updateAt;
 
-    public Receipt(String receiptID, String accountID, Integer totalMoney, String status, byte deleted, String createAt, String updateAt) {
-        this.receiptID = receiptID;
-        this.accountID = accountID;
-        this.totalMoney = totalMoney;
-        this.status = status;
-        this.deleted = deleted;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
-    }
+  public Receipt() {
+  }
 
-    public String getReceiptID() {
-        return receiptID;
-    }
+  public Receipt(String receiptID, String accountID, Integer totalMoney, String status,
+      byte deleted, String createAt, String updateAt) {
+    this.receiptID = receiptID;
+    this.accountID = accountID;
+    this.totalMoney = totalMoney;
+    this.status = status;
+    this.deleted = deleted;
+    this.createAt = createAt;
+    this.updateAt = updateAt;
+  }
 
-    public void setReceiptID(String receiptID) {
-        this.receiptID = receiptID;
-    }
+  public String getReceiptID() {
+    return receiptID;
+  }
 
-    public String getAccountID() {
-        return accountID;
-    }
+  public void setReceiptID(String receiptID) {
+    this.receiptID = receiptID;
+  }
 
-    public void setAccountID(String accountID) {
-        this.accountID = accountID;
-    }
+  public String getAccountID() {
+    return accountID;
+  }
 
-    public Integer getTotalMoney() {
-        return totalMoney;
-    }
+  public void setAccountID(String accountID) {
+    this.accountID = accountID;
+  }
 
-    public void setTotalMoney(Integer totalMoney) {
-        this.totalMoney = totalMoney;
-    }
+  public Integer getTotalMoney() {
+    return totalMoney;
+  }
 
-    public String getStatus() {
-        return status;
-    }
+  public void setTotalMoney(Integer totalMoney) {
+    this.totalMoney = totalMoney;
+  }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+  public String getStatus() {
+    return status;
+  }
 
-    public byte getDeleted() {
-        return deleted;
-    }
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
-    public void setDeleted(byte deleted) {
-        this.deleted = deleted;
-    }
+  public byte getDeleted() {
+    return deleted;
+  }
 
-    public String getCreateAt() {
-        return createAt;
-    }
+  public void setDeleted(byte deleted) {
+    this.deleted = deleted;
+  }
 
-    public void setCreateAt(String createAt) {
-        this.createAt = createAt;
-    }
+  public String getCreateAt() {
+    return createAt;
+  }
 
-    public String getUpdateAt() {
-        return updateAt;
-    }
+  public void setCreateAt(String createAt) {
+    this.createAt = createAt;
+  }
 
-    public void setUpdateAt(String updateAt) {
-        this.updateAt = updateAt;
-    }
+  public String getUpdateAt() {
+    return updateAt;
+  }
+
+  public void setUpdateAt(String updateAt) {
+    this.updateAt = updateAt;
+  }
 }

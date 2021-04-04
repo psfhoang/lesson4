@@ -17,23 +17,24 @@ import org.springframework.stereotype.Component;
 
 
 public class JwtTokenProvider {
+
   private final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
   @Value("hoang")
   private String key;
   private long JWT_EXPIRATION = 604800000L;
 
-  public String generateToken(String username){
+  public String generateToken(String username) {
     Date now = new Date();
-    Date expiryDate = new Date(now.getTime()+JWT_EXPIRATION);
+    Date expiryDate = new Date(now.getTime() + JWT_EXPIRATION);
     return Jwts.builder()
         .setSubject(username)
         .setIssuedAt(now)
         .setExpiration(expiryDate)
-        .signWith(SignatureAlgorithm.HS256,key)
+        .signWith(SignatureAlgorithm.HS256, key)
         .compact();
   }
 
-  public String getUsernameFromToken(String token){
+  public String getUsernameFromToken(String token) {
     Claims claims = Jwts.parser()
         .setSigningKey(key)
         .parseClaimsJws(token)
@@ -53,9 +54,11 @@ public class JwtTokenProvider {
       this.logger.info(
           "ExpiredJwtException. The specified JWT is a Claims JWT and the Claims has an expiration time before the time this method is invoked.");
     } catch (UnsupportedJwtException e) {
-      this.logger.info("UnsupportedJwtException. The claimsJws argument does not represent an Claims JWS.");
+      this.logger.info(
+          "UnsupportedJwtException. The claimsJws argument does not represent an Claims JWS.");
     } catch (IllegalArgumentException e) {
-      this.logger.info("IllegalArgumentException. The claimsJws string is null or empty or only whitespace.");
+      this.logger.info(
+          "IllegalArgumentException. The claimsJws string is null or empty or only whitespace.");
     }
     return false;
   }

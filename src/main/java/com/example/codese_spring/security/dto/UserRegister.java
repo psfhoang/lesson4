@@ -6,8 +6,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UserRegister {
+
   private String email;
+
   private String display;
+
   private String password;
 
 }

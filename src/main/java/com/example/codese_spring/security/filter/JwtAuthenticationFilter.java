@@ -14,9 +14,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
   JwtTokenProvider jwtTokenProvider;
   UserDetailsService userDetailsService;
+
   public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider,
       UserDetailsService userDetailsService) {
     this.jwtTokenProvider = jwtTokenProvider;
@@ -31,7 +34,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     if (authorizationString != null && jwtTokenProvider.validateToken(authorizationString)) {
       String username = jwtTokenProvider.getUsernameFromToken(authorizationString);
       UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-      Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null,
+      Authentication authentication = new UsernamePasswordAuthenticationToken(
+          userDetails.getUsername(), null,
           userDetails.getAuthorities());
       SecurityContextHolder.getContext().setAuthentication(authentication);
     } else {

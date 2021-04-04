@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderReqDto {
-    private List<ProductReqDto> productReqDtos;
 
-    public List<ProductReqDto> getProductReqDtos() {
-        return productReqDtos;
-    }
+  private List<ProductReqDto> productReqDtos;
 
-    public void setProductReqDtos(List<ProductReqDto> productReqDtos) {
-        this.productReqDtos = productReqDtos;
-    }
+  public List<ProductReqDto> getProductReqDtos() {
+    return productReqDtos;
+  }
+
+  public void setProductReqDtos(List<ProductReqDto> productReqDtos) {
+    this.productReqDtos = productReqDtos;
+  }
 }

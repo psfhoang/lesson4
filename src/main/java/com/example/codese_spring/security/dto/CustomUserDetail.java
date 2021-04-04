@@ -12,11 +12,12 @@ public class CustomUserDetail implements UserDetails {
   private String password;
   private Collection<GrantedAuthority> role = new ArrayList<>();
 
-  public CustomUserDetail(UserDTO userDTO){
-    this.username=userDTO.getEmail();
-    this.password=userDTO.getPassword();
+  public CustomUserDetail(UserDTO userDTO) {
+    this.username = userDTO.getEmail();
+    this.password = userDTO.getPassword();
     this.role.add(new SimpleGrantedAuthority(userDTO.getRoles()));
   }
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return role;

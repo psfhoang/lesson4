@@ -3,37 +3,38 @@ package com.example.codese_spring.exception;
 import java.sql.Timestamp;
 
 public class ErrorDetails {
-    private Timestamp timestamp;
-    private String details;
-    private String message;
 
-    public ErrorDetails(Timestamp timestamp, String details, String message) {
-        this.timestamp = timestamp;
-        this.details = details;
-        this.message = message;
-    }
+  private Timestamp timestamp;
+  private String details;
+  private String message;
 
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
+  public ErrorDetails(Timestamp timestamp, String details, String message) {
+    this.timestamp = timestamp;
+    this.details = details;
+    this.message = message;
+  }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
-    }
+  public Timestamp getTimestamp() {
+    return timestamp;
+  }
 
-    public String getDetails() {
-        return details;
-    }
+  public void setTimestamp(Timestamp timestamp) {
+    this.timestamp = timestamp;
+  }
 
-    public void setDetails(String details) {
-        this.details = details;
-    }
+  public String getDetails() {
+    return details;
+  }
 
-    public String getMessage() {
-        return message;
-    }
+  public void setDetails(String details) {
+    this.details = details;
+  }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
 }

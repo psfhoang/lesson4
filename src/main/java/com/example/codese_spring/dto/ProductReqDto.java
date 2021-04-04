@@ -1,22 +1,23 @@
 package com.example.codese_spring.dto;
 
 public class ProductReqDto {
-    private String productID;
-    private Integer amount;
 
-    public String getProductID() {
-        return productID;
-    }
+  private String productID;
+  private Integer amount;
 
-    public void setProductID(String productID) {
-        this.productID = productID;
-    }
+  public String getProductID() {
+    return productID;
+  }
 
-    public Integer getAmount() {
-        return amount;
-    }
+  public void setProductID(String productID) {
+    this.productID = productID;
+  }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+  public Integer getAmount() {
+    return amount;
+  }
+
+  public void setAmount(Integer amount) {
+    this.amount = amount;
+  }
 }

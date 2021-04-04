@@ -8,10 +8,15 @@ import org.springframework.security.core.GrantedAuthority;
 @Data
 @NoArgsConstructor
 public class UserDTO {
+
   private String email;
+
   private String password;
+
   private String roles;
+
   private String ID;
+
   private String display;
 
 

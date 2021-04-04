@@ -7,18 +7,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProductCRUDMapper implements RowMapper {
-    @Override
-    public ProductDTO mapRow(ResultSet resultSet, int i) throws SQLException {
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setProductID(resultSet.getString("productID"));
-        productDTO.setDisplay(resultSet.getString("display"));
-        productDTO.setAmount(resultSet.getInt("amount"));
-        productDTO.setPriceIn(resultSet.getInt("priceIn"));
-        productDTO.setPriceOut(resultSet.getInt("priceOut"));
-        productDTO.setDescription(resultSet.getString("description"));
-        productDTO.setShipday(resultSet.getInt("shipday"));
-        productDTO.setImages(resultSet.getString("images"));
-        productDTO.setPriceSale(resultSet.getInt("priceSale"));
-        return productDTO;
-    }
+
+  @Override
+  public ProductDTO mapRow(ResultSet resultSet, int i) throws SQLException {
+    ProductDTO productDTO = new ProductDTO();
+    productDTO.setProductID(resultSet.getString("productID"));
+    productDTO.setDisplay(resultSet.getString("display"));
+    productDTO.setAmount(resultSet.getInt("amount"));
+    productDTO.setPriceIn(resultSet.getInt("priceIn"));
+    productDTO.setPriceOut(resultSet.getInt("priceOut"));
+    productDTO.setDescription(resultSet.getString("description"));
+    productDTO.setShipday(resultSet.getInt("shipday"));
+    productDTO.setImages(resultSet.getString("images"));
+    productDTO.setPriceSale(resultSet.getInt("priceSale"));
+    return productDTO;
+  }
 }

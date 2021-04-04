@@ -18,43 +18,50 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
+
 @Service
-public class    ReceiptService {
-    @Autowired
-    ReceiptRepository receiptRepository;
-    @Autowired
-    ProductService productService;
-    @Autowired
-    UserRepository userRepository;
-    public List<ReceiptInfor> showAll(){
-        return receiptRepository.showInforAll();
-    }
+public class ReceiptService {
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = ProductTransactionException.class)
-    public Boolean createReceipt(OrderReqDto orderReqDto) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        UserDTO userDTO = userRepository.getUserByName(username);
-        List<ProductReqDto> productReqDtos = orderReqDto.getProductReqDtos();
-        Integer money = 0;
-        for(ProductReqDto productReqDto : productReqDtos){
-            money =money+ productService.getProductById(productReqDto.getProductID()).getPriceOut()
-                    *productReqDto.getAmount();
-        }
-        String status = "chua thanh toan";
-        String UUID = java.util.UUID.randomUUID().toString();
-        if(receiptRepository.addReceipt(UUID, money, status, userDTO.getID())==0){
-            return false;
-        };
+  @Autowired
+  ReceiptRepository receiptRepository;
+  @Autowired
+  ProductService productService;
+  @Autowired
+  UserRepository userRepository;
 
-        for (ProductReqDto productReqDto : productReqDtos) {
-            productService.subAmountProduct(productReqDto.getProductID()
-                    ,productReqDto.getAmount());
-            if(receiptRepository.addReceiptDetails(UUID,productReqDto.getProductID(),productReqDto.getAmount())==0){
-                return false;
-            };
-        }
-        return true;
+  public List<ReceiptInfor> showAll() {
+    return receiptRepository.showInforAll();
+  }
+
+  @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = ProductTransactionException.class)
+  public Boolean createReceipt(OrderReqDto orderReqDto) {
+    String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal()
+        .toString();
+    UserDTO userDTO = userRepository.getUserByName(username);
+    List<ProductReqDto> productReqDtos = orderReqDto.getProductReqDtos();
+    Integer money = 0;
+    for (ProductReqDto productReqDto : productReqDtos) {
+      money = money + productService.getProductById(productReqDto.getProductID()).getPriceOut()
+          * productReqDto.getAmount();
     }
+    String status = "chua thanh toan";
+    String UUID = java.util.UUID.randomUUID().toString();
+    if (receiptRepository.addReceipt(UUID, money, status, userDTO.getID()) == 0) {
+      return false;
+    }
+    ;
+
+    for (ProductReqDto productReqDto : productReqDtos) {
+      productService.subAmountProduct(productReqDto.getProductID()
+          , productReqDto.getAmount());
+      if (receiptRepository
+          .addReceiptDetails(UUID, productReqDto.getProductID(), productReqDto.getAmount()) == 0) {
+        return false;
+      }
+      ;
+    }
+    return true;
+  }
 
 
 }

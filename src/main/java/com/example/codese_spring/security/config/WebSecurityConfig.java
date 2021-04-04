@@ -24,27 +24,30 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
   @Bean
-  public UserDetailsService userDetailsService(){
+  public UserDetailsService userDetailsService() {
     return new CustomUserDetailService();
   }
+
   @Bean
-  public PasswordEncoder passwordEncoder()
-  {
+  public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
   @Bean
-  public UserRepository userRepository(){
+  public UserRepository userRepository() {
     return new UserRepository();
   }
+
   @Bean(BeanIds.AUTHENTICATION_MANAGER)
   @Override
   public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
   }
+
   @Bean
-  public JwtTokenProvider jwtTokenProvider(){
+  public JwtTokenProvider jwtTokenProvider() {
     return new JwtTokenProvider();
   }
 
@@ -63,13 +66,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.csrf().disable()
         .addFilter(new BasicAuthenticationFilter(authenticationManager()))
-        .addFilterBefore(new JwtUsernamePasswordAuthenticationFilter(authenticationManager(),jwtTokenProvider()),BasicAuthenticationFilter.class)
-        .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider(),userDetailsService()),JwtUsernamePasswordAuthenticationFilter.class)
+        .addFilterBefore(new JwtUsernamePasswordAuthenticationFilter(authenticationManager(),
+            jwtTokenProvider()), BasicAuthenticationFilter.class)
+        .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider(), userDetailsService()),
+            JwtUsernamePasswordAuthenticationFilter.class)
         .authorizeRequests()
-        .antMatchers("/user/register","/create-token").permitAll()
-        .antMatchers("/receipt/all").hasAnyAuthority("STAFF","ADMIN")
-        .antMatchers("/receipt/create").hasAnyAuthority("STAFF","ADMIN","USER")
-        .antMatchers("/product/all").hasAnyAuthority("STAFF","ADMIN")
+        .antMatchers("/user/register", "/create-token").permitAll()
+        .antMatchers("/receipt/all").hasAnyAuthority("STAFF", "ADMIN")
+        .antMatchers("/receipt/create").hasAnyAuthority("STAFF", "ADMIN", "USER")
+        .antMatchers("/product/all").hasAnyAuthority("STAFF", "ADMIN")
         .anyRequest()
         .permitAll()
         .and()
